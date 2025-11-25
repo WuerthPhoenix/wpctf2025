@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icinga Host Management Dashboard</title>
+    <style>
+        @font-face {
+            font-family: W95FA;
+            src: url('/fonts/W95FA.woff') format("woff");
+        }
+
+        @font-face {
+            font-family: VT323;
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('/fonts/pxiKyp0ihIEF2isfFJU.woff2') format("woff2");
+        }
+
+        @font-face {
+            font-family: Sysfont;
+            src: url('/fonts/sysfont.woff') format("woff");
+        }
+
+        /* Core Bootstrap-like styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #afafaf;
+            font-family: VT323, monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            max-width: 1200px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .col-12 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .col-md-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        /* Header */
+        .navbar {
+            padding: 10px 8px;
+            background: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #FFBF00;
+        }
+
+        .navbar-brand {
+            color: #FFBF00 !important;
+            font-family: Sysfont, monospace;
+            font-size: 24px;
+            font-weight: 400;
+            text-decoration: none;
+        }
+
+        /* Main content */
+        main {
+            padding-top: 80px;
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+        }
+
+        /* Form styles */
+        .bg-form {
+            background: rgba(255, 191, 0, 0.1);
+            padding: 20px;
+            margin: 40px auto;
+            max-width: 600px;
+            border: 2px solid #FFBF00;
+        }
+
+        .form-label {
+            font-family: VT323;
+            font-size: 20px;
+            font-weight: 400;
+            color: #FFBF00;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            background: rgba(255, 191, 0, 0.2);
+            font-family: VT323;
+            font-size: 20px;
+            font-weight: 400;
+            color: #FFBF00;
+            border: 2px solid transparent;
+            border-radius: 0;
+            height: 40px;
+            padding: 12px 14px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .form-control::placeholder {
+            color: #FFBF00;
+            opacity: 0.7;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border: 2px solid #FFBF00;
+            background: rgba(255, 191, 0, 0.4);
+        }
+
+        .btn-primary {
+            height: 50px;
+            background: #FFBF00;
+            color: #000;
+            border: 0;
+            font-family: VT323;
+            font-size: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+            padding: 14px 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.8;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .ascii-cloud {
+            position: absolute;
+            padding: 15px;
+            background-color: rgba(255, 191, 0, 0.1);
+            border: 2px solid rgba(255, 191, 0, 0.3);
+            border-radius: 0;
+            box-shadow: 0 0 20px rgba(255, 191, 0, 0.2);
+            font-family: VT323;
+            font-size: 16px;
+            color: #FFBF00;
+            min-width: 200px;
+            max-width: 300px;
+            transition: all 0.1s ease-out;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .ascii-cloud .host-name {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .ascii-cloud .host-address {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .ascii-cloud .host-state {
+            display: inline-block;
+            padding: 2px 8px;
+            margin-top: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .host-state.up {
+            background: rgba(0, 255, 0, 0.5);
+            color: #000;
+        }
+
+        .host-state.down {
+            background: rgba(255, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .host-state.unknown {
+            background: rgba(195, 195, 195, 0.5);
+            color: #000;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .ascii-cloud.flapping {
+            animation: bounce 0.3s ease-in-out;
+        }
+
+        /* Alert styles */
+        .alert {
+            border: 2px dashed #FFBF00;
+            font-family: VT323;
+            font-size: 18px;
+            padding: 10px 15px;
+            background: transparent;
+            color: #FFBF00;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .alert-danger {
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        /* Title */
+        .page-title {
+            font-family: Sysfont;
+            font-size: 48px;
+            font-weight: 400;
+            color: #FFBF00;
+            text-align: center;
+            margin: 40px 0;
+            text-transform: uppercase;
+        }
+
+        /* Host list */
+        .host-list {
+            margin-top: 40px;
+        }
+
+        .host-item {
+            background: rgba(255, 191, 0, 0.1);
+            border: 1px solid rgba(255, 191, 0, 0.3);
+            padding: 15px;
+            margin: 10px 0;
+            font-family: VT323;
+            font-size: 18px;
+            color: #FFBF00;
+        }
+
+        .host-item .host-name {
+            font-size: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .host-item .host-address {
+            opacity: 0.8;
+            margin: 5px 0;
+        }
+
+        .delete-btn {
+            background: rgba(255, 0, 0, 0.3);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            padding: 5px 10px;
+            font-family: VT323;
+            font-size: 14px;
+            cursor: pointer;
+            float: right;
+            text-transform: uppercase;
+        }
+
+        .delete-btn:hover {
+            background: rgba(255, 0, 0, 0.5);
+        }
+
+        .loading {
+            opacity: 0.6;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-indicator.connected {
+            background: #00ff00;
+        }
+
+        .status-indicator.disconnected {
+            background: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <span class="navbar-brand">
+                <span class="status-indicator" id="connectionStatus"></span>
+                ICINGA HOST MANAGER
+            </span>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main>
+        <div class="container">
+            <h1 class="page-title">Host Dashboard</h1>
+
+            <!-- Alert messages -->
+            <div id="alert-container">
+                <div id="success-alert" class="alert alert-success">
+                    Host added successfully!
+                </div>
+                <div id="error-alert" class="alert alert-danger">
+                    Error adding host. Please check your input.
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Add Host Form -->
+                <div class="col-md-6">
+                    <form class="bg-form" id="hostForm">
+                        <div class="mb-3">
+                            <label for="hostName" class="form-label">Object Name</label>
+                            <input type="text" class="form-control" id="hostName" name="hostName" placeholder="Enter host name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hostAddress" class="form-label">Host Address</label>
+                            <input type="text" class="form-control" id="hostAddress" name="hostAddress" placeholder="Enter IP address or hostname" required>
+                        </div>
+                        <button type="submit" class="btn-primary" id="submitBtn">Add Host</button>
+                    </form>
+                </div>
+                <!-- Host List -->
+                <div class="col-md-6">
+                    <div class="host-list bg-form">
+                        <h2 class="page-title" style="margin-top: 0; font-size: 24px;">Current Hosts</h2>
+                        <div id="host-list-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    
+        // Configuration
+        const API_BASE_URL = '';
+        
+        // State management
+        let hostMap = {};
+        let mouseX = 0;
+        let mouseY = 0;
+        let connectionStatus = false;
+
+        // Mouse tracking
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // API Functions
+        async function syncFloatingHosts() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/icinga/get_hosts`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                connectionStatus = response.ok;
+                updateConnectionStatus();
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.hosts) {
+                        const newHostSet = new Set(data.hosts.map(h => h.name));
+
+                        // Remove hosts that are no longer present
+                        Object.keys(hostMap).forEach(hostName => {
+                            if (!newHostSet.has(hostName)) {
+                                hostMap[hostName].destroy();
+                                delete hostMap[hostName];
+                                floatingHosts = floatingHosts.filter(fh => fh.host.name !== hostName);
+                            }
+                        });
+                        renderHostList(data.hosts);
+                    }
+                }
+                return response.ok;
+            } catch (error) {
+                console.error('Connection test failed:', error);
+                connectionStatus = false;
+                updateConnectionStatus();
+                return false;
+            }
+        }
+
+        async function createHostInIcinga(hostName, hostAddress) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/icinga/create_host`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        object_name: hostName,
+                        address: hostAddress
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    return { success: true, data: data };
+                } else if (response.status === 409) {
+                    return { success: false, error: 'Host already exists', code: 409 };
+                } else {
+                    return { success: false, error: data.error || 'Unknown error', data: data };
+                }
+            } catch (error) {
+                console.error('API Error:', error);
+                return { success: false, error: 'Network error: ' + error.message };
+            }
+        }
+
+        async function loadExistingHosts() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/icinga/get_hosts`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.hosts) {
+                        return data.hosts;
+                    }
+                }
+                return [];
+            } catch (error) {
+                console.error('Failed to load existing hosts:', error);
+                return [];
+            }
+        }
+
+        function updateConnectionStatus() {
+            const statusIndicator = document.getElementById('connectionStatus');
+            if (connectionStatus) {
+                statusIndicator.className = 'status-indicator connected';
+                statusIndicator.title = 'Connected to Icinga API';
+            } else {
+                statusIndicator.className = 'status-indicator disconnected';
+                statusIndicator.title = 'Disconnected from Icinga API';
+            }
+        }
+
+        function showAlert(alertId, message = null) {
+            // Hide all alerts first
+            document.querySelectorAll('.alert').forEach(alert => {
+                alert.classList.remove('show');
+            });
+            
+            // Show the specified alert
+            const alert = document.getElementById(alertId);
+            if (message) {
+                alert.textContent = message;
+            }
+            alert.classList.add('show');
+            
+            // Hide after 5 seconds
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 5000);
+        }
+
+        function renderHostList(hosts) {
+            const hostListContainer = document.getElementById('host-list-container');
+            hostListContainer.innerHTML = ''; // Clear existing list
+
+            if (hosts.length === 0) {
+                hostListContainer.innerHTML = '<p>No hosts found.</p>';
+                return;
+            }
+
+            hosts.forEach(host => {
+                const hostItem = document.createElement('div');
+                hostItem.className = 'host-item';
+                hostItem.innerHTML = `
+                    <div class="host-name">${host.name}</div>
+                    <div class="host-address">${host.address}</div>
+                `;
+                hostListContainer.appendChild(hostItem);
+            });
+        }
+
+        // Initialize the application
+        async function initializeApp() {
+            console.log('Initializing Icinga Dashboard...');
+            
+            // Test connection and load existing hosts
+            const connected = await syncFloatingHosts();
+            
+            if (connected) {
+                console.log('Connected to Icinga API');
+                showAlert('success-alert', 'Connected to Icinga API successfully');
+                const hosts = await loadExistingHosts();
+                renderHostList(hosts);
+            } else {
+                console.log('Failed to connect to Icinga API');
+                showAlert('error-alert', 'Warning: Could not connect to Icinga API. Operating in offline mode.');
+            }
+
+            // Form handling
+            document.getElementById('hostForm').addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const hostName = document.getElementById('hostName').value.trim();
+                const hostAddress = document.getElementById('hostAddress').value.trim();
+                const submitBtn = document.getElementById('submitBtn');
+
+                if (!hostName || !hostAddress) {
+                    console.error("Host name and address required");
+                    return;
+                }
+
+                submitBtn.disabled = true;
+
+                try {
+                    const response = await fetch('/icinga/create_host', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            object_name: hostName,
+                            address: hostAddress
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.log(errorText);
+                        throw new Error("HTTP " + response.status + ": " + errorText);
+                    }
+
+                    const result = await response.json();
+                    console.log("Host creation response:", result);
+                    
+                } catch (err) {
+                    console.error("Error creating host:", err);
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+
+        // Start the application
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+        // Periodically test connection
+        setInterval(syncFloatingHosts, 1000); // Test every second
+    </script>
+</body>
+</html>

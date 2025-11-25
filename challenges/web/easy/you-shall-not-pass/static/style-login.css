@@ -1,0 +1,96 @@
+/* Digital background */
+body {
+    background-image: url("../static/SfondoSatayo.jpg"); /* usa la tua immagine */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Central Box with glass effect */
+.login-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    width: 320px;
+    text-align: center;
+}
+
+/* Title */
+.login-box h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Form layout */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Input fields */
+.form input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-bottom: 2px solid #1abc9c;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.form input:focus {
+    border-bottom: 2px solid #e67e22;
+    box-shadow: 0 0 8px #e67e22;
+    outline: none;
+}
+
+.form input::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Login Button */
+.form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to bottom, #2980b9, #3498db);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.form button:hover {
+    box-shadow: 0 0 12px #3498db;
+    background-color: #1abc9c;
+}
+
+/* Error message */
+.message {
+    background-color: #e74c3c;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: bold;
+}

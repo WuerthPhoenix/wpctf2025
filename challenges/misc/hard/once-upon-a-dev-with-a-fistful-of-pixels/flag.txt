@@ -1,0 +1,6 @@
+#1 WPCTF{El Topo} case insesitive.
+#2 WPCTF{Alejandro Jodorowsky} case insesitive.
+#3 WPCTF{TH4_FLAG_IS_Lunchroom3-Repacking4-Unblessed4} case sensitive
+#4 WPCTF{COWBOY SHOWDOWN} case insesitive.
+#5 WPCTF{@SOR-MAR} case insesitive.
+#6 WPCTF{MB2#501} case insesitive.

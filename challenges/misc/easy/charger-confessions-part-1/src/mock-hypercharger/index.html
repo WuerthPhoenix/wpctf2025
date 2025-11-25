@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HyperCharger Configuration</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles/layout.css" type="text/css">
+</head>
+<body>
+    <header id="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>HyperCharger Configuration</h1>
+                <h2>Setup the configuration files for HYC_2025_WPCTF</h2>
+            </div>
+            <div class="header-right">
+                <div class="logo">
+                    <span class="logo-icon">▲</span>
+                    <div class="logo-text">
+                        <span class="brand">alpitronic</span>
+                        <span class="product">hypercharger</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="config-grid">
+                <div class="config-item">
+                    <a href="./cgi-bin/network/configure_ethernet.cgi" class="config-button">
+                        <div class="button-label">NETWORK</div>
+                    </a>
+                    <div class="config-info">
+                        <h3>Network Configuration</h3>
+                        <p>Access the network configuration interface.</p>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <a href="./cgi-bin/status/view_processes.cgi" class="config-button">
+                        <div class="button-label">STATUS</div>
+                    </a>
+                    <div class="config-info">
+                        <h3>HyperCharger Status</h3>
+                        <p>View the status of the stack, and the processes ongoing.</p>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <a href="./cgi-bin/ocpp/configure_ocpp.cgi" class="config-button">
+                        <div class="button-label">OCPP</div>
+                    </a>
+                    <div class="config-info">
+                        <h3>OCPP Configuration</h3>
+                        <p>Access the configuration for the ocpp parameters, located in the OCPP_config folder on root.</p>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <a href="./cgi-bin/general/system_settings.cgi" class="config-button">
+                        <div class="button-label">GENERAL</div>
+                    </a>
+                    <div class="config-info">
+                        <h3>General Settings</h3>
+                        <p>General setting like the whitelist of the NFC readed and Max Power drain.</p>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <a href="./cgi-bin/home/password_change.cgi" class="config-button">
+                        <div class="button-label">PASS</div>
+                    </a>
+                    <div class="config-info">
+                        <h3>Password Configuration</h3>
+                        <p>Change the username and password.</p>
+                    </div>
+                </div>
+                
+                <div class="config-item">
+                    <a href="./cgi-bin/home/system.cgi" class="config-button">
+                        <div class="button-label">RESET</div>
+                    </a>
+                    <div class="config-info">
+                        <h3>System Reset</h3>
+                        <p>Reset the HYC.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <aside class="sidebar">
+            <h2>How it works</h2>
+            <ul class="instructions">
+                <li>Select one of the possible configurations,</li>
+                <li>and please try to avoid using the go back</li>
+                <li>function (may overwrite unwanted changes).</li>
+            </ul>
+            
+            <a href="./cgi-bin/status/view_connectors.cgi" class="status-table-link">
+                <table class="status-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Error</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="status-indicator connected"></span>CCS</td>
+                            <td>unconnected</td>
+                            <td>NoError</td>
+                        </tr>
+                        <tr>
+                            <td><span class="status-indicator disconnected"></span>CCS</td>
+                            <td>unavailable</td>
+                            <td>NoError</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="expand-note">Click to Expand</p>
+            </a>
+        </aside>
+    </div>
+    
+    <footer id="footer">
+        <div class="footer-content">
+            <p class="copyright">
+                Copyright © 2022 - All Rights Reserved - 
+                <a href="#">alpitronic GmbH.</a>
+                <a href="./cgi-bin/maintain/options.cgi">END OF LINE AND MAINTENANCE MODE</a>
+                <span style="opacity: 0.01; font-size: 1px;"><a href="./cgi-bin/flag.cgi">.</a></span>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

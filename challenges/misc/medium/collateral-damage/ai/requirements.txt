@@ -1,0 +1,6 @@
+langchain==0.3.15
+langchain-community==0.3.15
+langchain-openai==0.3.2
+langchain-azure-ai==0.1.4
+uvicorn==0.32.0
+fastapi==0.115.5

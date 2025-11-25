@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Dashboard</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="main-navbar">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="base-navbars">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="navbar-text" id="user-welcome"></span>
+                    </li>
+                    <li class="nav-item d-flex align-items-center ps-3">
+                        <button id="logout-btn" class="btn btn-outline-light btn-sm">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="max-500px">
+                Host Dashboard
+            </h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col offset-md-2 col-lg-6 offset-lg-3">
+
+                <div id="error-message" class="error alert alert-danger alert-dismissible text-center hidden"></div>
+
+                <div class="search-section mb-4">
+                    <div class="row mb-3">
+                        <div class="col-8">
+                            <input type="text" id="search-input" class="form-control" placeholder="Search hosts...">
+                        </div>
+                        <div class="col-2">
+                            <button id="search-btn" class="btn btn-primary w-100">Search</button>
+                        </div>
+                        <div class="col-2">
+                            <button id="clear-btn" class="btn btn-secondary w-100">Clear</button>
+                        </div>
+                    </div>
+                    <div class="host-count text-center">
+                        <span id="host-count">0 hosts found</span>
+                    </div>
+                </div>
+
+                <div id="loading" class="loading text-center hidden">Loading hosts...</div>
+
+                <table id="hosts-table" class="hosts table table-striped hidden">
+                    <thead>
+                        <tr>
+                            <td>Host Name</td>
+                            <td>Address</td>
+                            <td>Groups</td>
+                            <td>State</td>
+                            <td>Last Check</td>
+                        </tr>
+                    </thead>
+                    <tbody id="hosts-tbody">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/static/js/dashboard.js"></script>
+</body>
+</html>

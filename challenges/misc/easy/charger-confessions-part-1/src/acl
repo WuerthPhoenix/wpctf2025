@@ -1,0 +1,21 @@
+# Anonymous users can read/write most topics except internal and admin-specific topics
+topic readwrite sensors/#
+topic readwrite logs/#
+topic readwrite alerts/#
+topic readwrite data/#
+topic readwrite network/#
+topic readwrite security/#
+topic readwrite monitoring/#
+
+# Deny anonymous access to internal and admin-specific topics
+topic deny internal/#
+topic deny admin/#
+topic deny credentials/#
+topic deny system/#
+
+# Only admin_user can access the hidden internal topic and admin-specific topics
+user admin_user
+topic readwrite internal/#
+topic readwrite admin/#
+topic readwrite credentials/#
+topic readwrite system/#

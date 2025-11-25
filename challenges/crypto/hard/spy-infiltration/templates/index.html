@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniLink™ Management Suite</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <div class="jumbotron pt-4">
+        <div class="container">
+            <h1 class="text-center">OmniLink™ Management Suite</h1>
+            <p class="text-center">Central Server Configuration Utility v2.1.8</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <div id="error-message" class="error alert alert-danger alert-dismissible text-center hidden"></div>
+
+                <form id="configForm" autocomplete="off" class="center bg-form">
+                    <div class="mb-3">
+                        <label class="form-label" for="device_id">Device ID</label>
+                        <input class="form-control" id="device_id" name="device_id" placeholder="Enter Device ID" required
+                            type="text" value="OMNI-7B4D-9C2A-F1E0" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="comment">Comment</label>
+                        <textarea id="comment" name="comment" rows="3" class="form-control" placeholder="Enter optional comment...">{{config.comment}}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Password</label>
+                        <input class="form-control" id="password" name="password" placeholder="********" type="password" disabled>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="baud_rate" class="form-label">Baud Rate</label>
+                            <input type="text" class="form-control" placeholder="Enter custom baud rate..." id="baud_rate" name="baud_rate" value="{{config.baudrate}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="timezone" class="form-label">Timezone</label>
+                            <select class="form-select" id="timezone-select">
+                                <option value="" disabled selected>Select timezone...</option>
+                                <option value="UTC">UTC</option>
+                                <option value="PST">PST</option>
+                                <option value="EST">EST</option>
+                                <option value="CST">CST</option>
+                                <option value="MST">MST</option>
+                                <option value="GMT">GMT</option>
+                                <option value="CET">CET</option>
+                                <option value="EET">EET</option>
+                                <option value="IST">IST</option>
+                                <option value="CST-Asia">CST (China)</option>
+                                <option value="JST">JST</option>
+                                <option value="AEST">AEST</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="mode" class="form-label">Mode</label>
+                            <select class="form-select" id="mode-select">
+                                <option value="" disabled selected>Select mode...</option>
+                                <option value="normal">Normal</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="safe">Safe</option>
+                                <option value="performance">Performance</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-6">
+                            <button id="save-btn" class="btn btn-primary w-100" id="save-btn">Save Configuration</button>
+                        </div>
+                        <div class="col-6">
+                            <button id="download-btn" class="btn btn-primary w-100" id="download-btn">Download Configuration</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="static/js/script.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+
+# readme
+README.md
+
+# Git
+.git/
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+
+# env and configs
+.gitignore
+opsie_test.py

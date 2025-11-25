@@ -1,0 +1,5 @@
+server
+*.crt
+*.key
+flag.html
+admin.pem

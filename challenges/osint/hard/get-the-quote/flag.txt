@@ -1,0 +1,9 @@
+WPCTF{phishing_kit}  
+WPCTF{https://swissquotech.com/swissquote-2024.zip}
+WPCTF{Swissquote_Group_Holding_SA}
+WPCTF{SEO_poisoning}
+WPCTF{goripooL0}
+WPCTF{Telegram}
+WPCTF{7251025799:AAH8kcqq7jjQIcl_d8KJ15CrvETUhWjtxa4}
+WPCTF{ledgernewupdated-2025.zip}
+WPCTF{securitycom-io.info}

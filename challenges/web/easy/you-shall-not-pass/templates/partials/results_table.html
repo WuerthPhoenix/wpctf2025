@@ -1,0 +1,37 @@
+<!-- templates/partials/results_table.html -->
+<div id="results-container">
+  {% if results %}
+    <table>
+      <thead>
+        <tr><th>Subject</th><th>Content</th></tr>
+      </thead>
+      <tbody>
+        {% for row in results %}
+        <tr>
+          <td>
+            <div class="preview" onclick="toggleContent(this)" title="Click to expand">
+              {{ row['subject'] }}
+            </div>
+          </td>
+          <td>
+            <div class="preview" onclick="toggleContent(this)" title="Click to expand">
+              {{ row['content'] }}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="pagination">
+      {% if page > 1 %}
+        <a href="{{ url_for('dashboard', q=q, page=page-1) }}" class="pagination-link">← Prev</a>
+      {% endif %}
+      <span>Page {{ page }} of {{ total_pages }}</span>
+      {% if page < total_pages %}
+        <a href="{{ url_for('dashboard', q=q, page=page+1) }}" class="pagination-link">Next →</a>
+      {% endif %}
+    </div>
+  {% else %}
+    <p style="color:#e67e22;">⚠️ No results found for "{{ q }}"</p>
+  {% endif %}
+</div>

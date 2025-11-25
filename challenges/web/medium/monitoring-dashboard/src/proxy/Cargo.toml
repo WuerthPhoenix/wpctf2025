@@ -1,0 +1,32 @@
+[package]
+name = "proxy"
+version = "1.16.1-1"
+edition = "2021"
+
+[[bin]]
+name = "proxy"
+path = "src/main.rs"
+
+[dependencies]
+dotenv = "0.15.0"
+garde = { version = "0.21.1" , features = ["derive"]}
+regex = "1.11.1"
+reqwest = { version = "0.12", features = ["json"] }
+rocket = { version = "0.5.1", features = ["json", "secrets"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rusqlite = { version = "0.37", features = ["bundled"] }
+uuid = { version = "1.0", features = ["v4"] }
+time = "0.3"
+
+reqwest-middleware = { version = "0.4.0", features = ["json"] }
+
+[dev-dependencies]
+tokio = { version = "1.42", features = ["macros", "rt-multi-thread"] }
+
+# This is a temporary fix for https://github.com/servo/rust-url/issues/927.
+# This can be removed when one of the two PRs is merged and release.
+# If the fix will be this PR https://github.com/servo/rust-url/pull/928 wait for reqwest to update its dependency.
+# If the fix will be this PR https://github.com/servo/rust-url/pull/1028 instead, reqwest should also support the new flag and let devs choose it.
+[patch.crates-io]
+form_urlencoded = { git = "https://github.com/servo/rust-url.git", rev = "2ffe20edcd53497d58d7b7589344c81c2a1a6159" }

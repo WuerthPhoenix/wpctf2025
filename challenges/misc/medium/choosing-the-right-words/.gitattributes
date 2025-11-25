@@ -1,0 +1,4 @@
+*.skops filter=lfs diff=lfs merge=lfs -text
+train/datasets/* filter=lfs diff=lfs merge=lfs -text
+challenge/all_emails.csv filter=lfs diff=lfs merge=lfs -text
+challenge/spam_emails.csv filter=lfs diff=lfs merge=lfs -text

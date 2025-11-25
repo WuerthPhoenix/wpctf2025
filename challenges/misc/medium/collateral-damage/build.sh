@@ -1,0 +1,1 @@
+docker build -t wpctf2025-challenges:collateral-damage ai

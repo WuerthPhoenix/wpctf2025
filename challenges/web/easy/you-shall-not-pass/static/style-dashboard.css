@@ -1,0 +1,224 @@
+/* === Base === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #0b0c10, #1f2833);
+  color: #c5c6c7;
+}
+
+/* === Header === */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f2833;
+  padding: 15px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.logout {
+  color: #66fcf1;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.logout:hover {
+  color: #ffffff;
+}
+
+/* === Layout === */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 60px);
+  width: 100%;
+}
+
+/* === Main Content (Map) === */
+.main-content {
+  flex: 3;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.main-content h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+iframe {
+  width: 100%;
+  height: 80vh;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* === Communications Sidebar === */
+.communications {
+  flex: 1;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  overflow-y: auto;
+}
+
+.communications h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #66fcf1;
+}
+
+/* === Search Form === */
+form {
+  margin-bottom: 15px;
+}
+
+input[name="q"] {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: 2px solid #1abc9c;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: border-bottom 0.3s ease;
+}
+
+input[name="q"]:focus {
+  border-bottom: 2px solid #e67e22;
+  outline: none;
+}
+
+button[type="submit"] {
+  padding: 8px 16px;
+  background: linear-gradient(to bottom, #2980b9, #3498db);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #1abc9c;
+  transform: scale(1.05);
+}
+
+/* === Table === */
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  height: 40px; /* altezza fissa */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  word-break: break-word;
+  white-space: normal;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+  background-color: rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  color: #ffffff;
+}
+
+td {
+  color: #e0e0e0;
+}
+
+table tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* === Badge (optional) === */
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+  background-color: #e67e22;
+  color: white;
+  margin-left: 6px;
+}
+
+/* === Spinner === */
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top: 4px solid #66fcf1;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.pagination {
+  margin-top: 1em;
+  text-align: center;
+}
+.pagination a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #3498db;
+}
+.pagination span {
+  font-weight: bold;
+}
+
+.preview {
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: max-height 0.3s ease;
+}
+
+.preview.expanded {
+  white-space: normal;
+  max-height: 500px; /* espansione massima */
+}

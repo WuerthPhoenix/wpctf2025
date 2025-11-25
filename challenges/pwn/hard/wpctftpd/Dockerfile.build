@@ -1,0 +1,29 @@
+FROM alpine:3.22 AS build
+
+LABEL maintainer="7h0m4s"
+
+RUN apk --update add --no-cache \
+  build-base \
+  cmake
+
+WORKDIR /opt
+
+COPY src/ wpctftpd
+
+WORKDIR /opt/wpctftpd
+
+RUN rm -rf build \
+ && mkdir build \
+ && cd build \
+ && cmake \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    .. \
+ && make
+
+
+# Create a clean alpine image and copy the server to it
+FROM alpine:3.22 AS export-stage
+
+
+COPY --from=build /opt/wpctftpd/build/wpctftpd /wpctftpd

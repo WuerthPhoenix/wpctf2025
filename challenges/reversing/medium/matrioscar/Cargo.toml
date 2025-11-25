@@ -1,0 +1,19 @@
+[package]
+name = "matrioscar-1"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "pyo3_crypto"
+crate-type = ["cdylib"]
+
+[dependencies]
+aes = "0.8.4"
+base64 = "0.22.1"
+cbc = { version = "0.1.2", features = ["std"] }
+chrono = "0.4.42"
+hex = "0.4.3"
+pyo3 = "0.27.0"
+rand = "0.9.2"
+sha2 = "0.10.9"

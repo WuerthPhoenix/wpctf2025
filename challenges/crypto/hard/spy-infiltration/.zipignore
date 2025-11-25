@@ -1,0 +1,7 @@
+flag.txt
+secret.txt
+exploit.py
+build.sh
+.zipignore
+README.md
+*.zip

@@ -1,0 +1,3 @@
+WPCTF{Ph1sh_d0wnl_blob7}
+WPCTF{F41l3d_P3rs1st3nc3_M3ch4n1sm}
+WPCTF{Wr0ngly_N4m3d_T4sk}

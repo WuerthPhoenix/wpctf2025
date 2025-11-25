@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring - Login</title>
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="max-500px">
+                Monitoring
+            </h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col offset-md-2 col-lg-6 offset-lg-3">
+
+                <div id="error-message" class="error alert alert-danger alert-dismissible text-center hidden"></div>
+
+                <form id="loginForm" autocomplete="off" class="center bg-form">
+                    <div class="mb-3">
+                        <label class="form-label" for="username">Username</label>
+                        <input autofocus="" class="form-control" id="username" name="username" placeholder=" " required="" type="text" value="">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Password</label>
+                        <input class="form-control" id="password" name="password" placeholder=" " required="" type="password" value="">
+                    </div>
+
+                    <div class="row pt-3">
+                        <div class="col-12">
+                            <input class="btn btn-block btn-primary w-100" type="submit" value="Login">
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/static/js/login.js"></script>
+</body>
+</html>
